@@ -7,8 +7,14 @@ Supported Calculations:
 1. Percent Change (increase/decrease): `% 3 6` -> 100%
 2. Percent of; What is 3 percent of 100: `% 3 of 100` -> 3%
 3. Percent Difference; What is 2 percent from 100: `% 100 - 2%`
+4. Percent Increase; What is 100 + 2%: `% 100 + 2%`
 """
 import sys
+
+
+def percent_increase(a, b):
+    """What is `a` + `b`%?"""
+    return str(round(a + (a * (b / 100.0)), 2))
 
 
 def percent_difference(a, b):
@@ -71,6 +77,13 @@ def _eq(a, b):
         sys.stdout.write(".")
 
 
+def test_percent_increase():
+    _eq(percent_increase(100.0, 2.0), "102.0")
+    _eq(percent_increase(12.34, 2.0), "12.59")
+    _eq(percent_increase(12.34, 2.5), "12.65")
+    _eq(percent_increase(14.0, 2.0), "14.28")
+
+
 def test_percent_difference():
     _eq(percent_difference(100.0, 2.0), "98.0")
     _eq(percent_difference(12.34, 2.0), "12.09")
@@ -101,6 +114,7 @@ if __name__ == "__main__":
 
     elif len(sys.argv) == 2 and sys.argv[1] == "test":
         print("Running Tests:\n")
+        test_percent_increase()
         test_percent_difference()
         test_percent_of()
         test_percent_change()
