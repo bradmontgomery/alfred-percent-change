@@ -106,6 +106,8 @@ def test_percent_change():
 def test_parse():
     _eq(parse("3 6"), "100.0")  # percent_change
     _eq(parse("2 of 5"), "40.0")  # percent_of
+    _eq(parse("100 - 2%"), "98.0")  # percent_decrease
+    _eq(parse("100 + 2%"), "102.0")  # percent_increase
 
 
 if __name__ == "__main__":
