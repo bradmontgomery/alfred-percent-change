@@ -6,9 +6,14 @@ Supported Calculations:
 
 1. Percent Change (increase/decrease): `% 3 6` -> 100%
 2. Percent of; What is 3 percent of 100: `% 3 of 100` -> 3%
-
+3. Percent Difference; What is 2 percent from 100: `% 100 - 2%`
 """
 import sys
+
+
+def percent_difference(a, b):
+    """What is `a` - `b`%?"""
+    return str(round(a - (a * (b / 100.0)), 2))
 
 
 def percent_of(a, b):
@@ -30,10 +35,20 @@ def parse(input_string):
     """Parses the input string and hands off the values to the correct function."""
     values = input_string.strip().split(' ')
     if len(values) == 2:
-        # We got `% a b`, calculate percent change.
+        # `% a b`. percent_change.
         return percent_change(float(values[0]), float(values[1]))
     elif len(values) == 3 and 'of' in values:
-        return percent_of(float(values[0]), float(values[-1]))
+        # `% a of b`. percent_of
+        a = float(values[0])
+        b = float(values[-1])
+        return percent_of(a, b)
+    elif len(values) == 3 and '-' in values:
+        # `% a - b%`. percent_difference
+        a = float(values[0])
+        b = float(values[-1].replace("%", ""))
+        return percent_difference(a, b)
+    else:
+        return "What?"
 
 # -----------------------------------------------------------------------------
 # Some Tests. To run these, do:
@@ -54,6 +69,13 @@ def _eq(a, b):
         FAILURES.append("{0} is not equal to {1}".format(a, b))
     else:
         sys.stdout.write(".")
+
+
+def test_percent_difference():
+    _eq(percent_difference(100.0, 2.0), "98.0")
+    _eq(percent_difference(12.34, 2.0), "12.09")
+    _eq(percent_difference(12.34, 2.5), "12.03")
+    _eq(percent_difference(14.0, 2.0), "13.72")
 
 
 def test_percent_of():
@@ -79,8 +101,9 @@ if __name__ == "__main__":
 
     elif len(sys.argv) == 2 and sys.argv[1] == "test":
         print("Running Tests:\n")
-        test_percent_change()
+        test_percent_difference()
         test_percent_of()
+        test_percent_change()
         print("\n\nDone.")
         if len(FAILURES):
             print("ERRORS:")
