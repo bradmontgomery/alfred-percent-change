@@ -53,6 +53,11 @@ def parse(input_string):
         a = float(values[0])
         b = float(values[-1].replace("%", ""))
         return percent_difference(a, b)
+    elif len(values) == 3 and '+' in values:
+        # `% a + b%`. percent_increase
+        a = float(values[0])
+        b = float(values[-1].replace("%", ""))
+        return percent_increase(a, b)
     else:
         return "What?"
 
