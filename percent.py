@@ -10,7 +10,7 @@ Supported Calculations:
 3. Percent Difference; What is 2 percent from 100: `% 100 - 2%`
 4. Percent Increase; What is 100 + 2%: `% 100 + 2%`
 """
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 import sys
 from workflow import Workflow, ICON_INFO
 
