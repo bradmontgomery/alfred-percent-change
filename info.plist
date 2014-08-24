@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.bradmontgomery.percent_change</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict/>
+	<key>createdby</key>
+	<string>Brad Montgomery</string>
+	<key>description</key>
+	<string>Easily do percentage calculations.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Percent Change</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>%</string>
+				<key>runningsubtext</key>
+				<string>calculating</string>
+				<key>script</key>
+				<string>python percent.py "{query}"</string>
+				<key>subtext</key>
+				<string>Use "% help" to see examples.</string>
+				<key>title</key>
+				<string>Percent Calculations</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>ABB6BA81-8665-40FE-A867-448DF94386CA</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Percent Change
+--------------
+
+This is an Alfred Workflow to help you do percentage calculations. The supported calculations include:
+
+1. *Percent Change* (increase/decrease): `% 3 6` gives you 100%.
+2. *Percent of*; What is 3 percent of 100: `% 3 of 100` gives you 3.
+3. *Percent Difference*; What is 2 percent from 100: `% 100 - 2%` gives you 98.
+4. *Percent Increase*; What is 100 + 2%: `% 100 + 2%` gives you 102.
+
+This Workflow is available under the terms of the MIT License.
+
+LICENSE
+
+Copyright (c) 2014, Brad Montgomery &lt;brad@bradmontgomery.net&gt;
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</string>
+	<key>uidata</key>
+	<dict>
+		<key>ABB6BA81-8665-40FE-A867-448DF94386CA</key>
+		<dict>
+			<key>ypos</key>
+			<real>80</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://bradmontgomery.net</string>
+</dict>
+</plist>
