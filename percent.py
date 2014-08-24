@@ -1,3 +1,4 @@
+# encoding: utf-8
 """
 This is the python code for the calculations. To build the workflow, I just
 copy & paste this code into Alfred.
@@ -11,6 +12,7 @@ Supported Calculations:
 """
 __version__ = "1.2.0"
 import sys
+from workflow import Workflow, ICON_INFO
 
 
 def percent_increase(a, b):
@@ -38,29 +40,57 @@ def percent_change(a, b):
     return str(round(result, 2))
 
 
-def parse(input_string):
-    """Parses the input string and hands off the values to the correct function."""
-    values = input_string.strip().split(' ')
-    if len(values) == 2:
-        # `% a b`. percent_change.
-        return percent_change(float(values[0]), float(values[1]))
-    elif len(values) == 3 and 'of' in values:
-        # `% a of b`. percent_of
-        a = float(values[0])
-        b = float(values[-1])
-        return percent_of(a, b)
-    elif len(values) == 3 and '-' in values:
-        # `% a - b%`. percent_difference
-        a = float(values[0])
-        b = float(values[-1].replace("%", ""))
-        return percent_difference(a, b)
-    elif len(values) == 3 and '+' in values:
-        # `% a + b%`. percent_increase
-        a = float(values[0])
-        b = float(values[-1].replace("%", ""))
-        return percent_increase(a, b)
-    else:
-        return "What?"
+def parse(args):
+    """Inspects the input arguments and calls the correct function.
+
+    Returns a Tuple:
+        (the calculated value, a human-readable version of the function used)
+
+    """
+    try:
+        values = ''
+        if len(args) == 1 and type(args) == list:
+            values = args[0].strip().split(' ')
+
+        if len(values) == 2:
+            # `% a b`. percent_change.
+            result = percent_change(float(values[0]), float(values[1]))
+            return (result, 'Percent Change')
+        elif len(values) == 3 and 'of' in values:
+            # `% a of b`. percent_of
+            a = float(values[0])
+            b = float(values[-1])
+            result = percent_of(a, b)
+            return (result, 'Percent of')
+        elif len(values) == 3 and '-' in values:
+            # `% a - b%`. percent_difference
+            a = float(values[0])
+            b = float(values[-1].replace("%", ""))
+            result = percent_difference(a, b)
+            return (result, 'Percent difference')
+        elif len(values) == 3 and '+' in values:
+            # `% a + b%`. percent_increase
+            a = float(values[0])
+            b = float(values[-1].replace("%", ""))
+            result = percent_increase(a, b)
+            return (result, 'Percent increase')
+        elif len(values) == 1 and "help" in values:
+            # `% help`
+            return ("Help", (
+                "Increase: % 3 6, "
+                "Add/Subtract: % 100 + 2%, "
+                "Percent of: % 3 of 100"
+            ))
+        else:
+            return ("What?", "I don't know what you mean.")
+    except ValueError:
+        return ("What?", "...")
+
+
+def main(wf):
+    results, subtitle = parse(wf.args)
+    wf.add_item(title=results, subtitle=subtitle, icon=ICON_INFO)
+    wf.send_feedback()  # Send results back to Alfred as XML
 
 # -----------------------------------------------------------------------------
 # Some Tests. To run these, do:
@@ -117,10 +147,7 @@ def test_parse():
 
 
 if __name__ == "__main__":
-    if sys.argv[0] == "-c":  # Getting run by alfred.
-        sys.stdout.write(parse('{query}'))
-
-    elif len(sys.argv) == 2 and sys.argv[1] == "test":
+    if len(sys.argv) == 2 and sys.argv[1] == "test":
         print("Running Tests:\n")
         test_percent_increase()
         test_percent_difference()
@@ -130,3 +157,6 @@ if __name__ == "__main__":
         if len(FAILURES):
             print("ERRORS:")
             print("\n{0}\n".format("\n".join(FAILURES)))
+    else:
+        wf = Workflow(libraries=['./lib'])
+        sys.exit(wf.run(main))
