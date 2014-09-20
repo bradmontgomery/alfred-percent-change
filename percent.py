@@ -62,7 +62,7 @@ def parse(args):
             a = float(values[0])
             b = float(values[-1])
             result = portion_of(a, b)
-            return (result, 'Portion of')
+            return (result, 'Percentage of')
         elif len(values) == 3 and '-' in values:
             # `% a - b%`. percent_difference
             a = float(values[0])
