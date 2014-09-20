@@ -68,19 +68,19 @@ def parse(args):
             a = float(values[0])
             b = float(values[-1])
             result = percent_of(a, b)
-            return (result, 'Percent of')
+            return (result, 'Percentage of')
         elif len(values) == 3 and values[0].endswith("%"):
             # `% a% of b`. percent_of
             a = float(values[0].strip("%"))
             b = float(values[-1])
             result = percent_of(a, b)
-            return (result, 'Percent of')
+            return (result, 'Percentage of')
         elif len(values) == 3 and 'of' in values:
             # `% a of b`. portion_of
             a = float(values[0])
             b = float(values[-1])
             result = portion_of(a, b)
-            return (result, 'Percentage of')
+            return (result, 'Portion of')
         elif len(values) == 3 and '-' in values:
             # `% a - b%`. percent_difference
             a = float(values[0])
