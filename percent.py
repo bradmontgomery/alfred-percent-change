@@ -108,7 +108,7 @@ def parse(args):
 
 def main(wf):
     results, subtitle = parse(wf.args)
-    wf.add_item(title=results, subtitle=subtitle, icon=ICON_INFO)
+    wf.add_item(title=results, subtitle=subtitle)
     wf.send_feedback()  # Send results back to Alfred as XML
 
 # -----------------------------------------------------------------------------
