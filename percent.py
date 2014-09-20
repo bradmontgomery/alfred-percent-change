@@ -7,8 +7,9 @@ Supported Calculations:
 
 1. Percent Change (increase/decrease): `% 3 6` -> 100%
 2. Portion of; 3 is what percent of 100: `% 3 of 100` -> 3%
-3. Percent Difference; What is 2 percent from 100: `% 100 - 2%`
-4. Percent Increase; What is 100 + 2%: `% 100 + 2%`
+3. Percent of: 5 percent of 100 is 5: `% 5 percent of 100` -> 5, or `% 5% of 100` -> 5
+4. Percent Difference; What is 2 percent from 100: `% 100 - 2%`
+5. Percent Increase; What is 100 + 2%: `% 100 + 2%`
 
 """
 __version__ = "1.3.0"
@@ -29,6 +30,11 @@ def percent_difference(a, b):
 def portion_of(a, b):
     """`a` of `b` is what percent?"""
     return "{0}%".format(str(round((a / b) * 100, 2)))
+
+
+def percent_of(a, b):
+    """Calculates `a` percent of `b` is what percent?"""
+    return str(round((a / 100.0) * b, 2))
 
 
 def percent_change(a, b):
@@ -57,6 +63,18 @@ def parse(args):
             # `% a b`. percent_change.
             result = percent_change(float(values[0]), float(values[1]))
             return (result, 'Percent Change')
+        elif len(values) == 4 and 'percent' in values and 'of' in values:
+            # `% a percent of b`. percent_of
+            a = float(values[0])
+            b = float(values[-1])
+            result = percent_of(a, b)
+            return (result, 'Percent of')
+        elif len(values) == 3 and values[0].endswith("%"):
+            # `% a% of b`. percent_of
+            a = float(values[0].strip("%"))
+            b = float(values[-1])
+            result = percent_of(a, b)
+            return (result, 'Percent of')
         elif len(values) == 3 and 'of' in values:
             # `% a of b`. portion_of
             a = float(values[0])
@@ -134,6 +152,13 @@ def test_portion_of():
     _eq(portion_of(5.0, 3.0), "166.67%")
 
 
+def test_percent_of():
+    _eq(percent_of(3, 10), "0.3")
+    _eq(percent_of(100, 10), "10.0")
+    _eq(percent_of(5, 100), "5.0")
+    _eq(percent_of(110, 3), "3.3")
+
+
 def test_percent_change():
     _eq(percent_change(3.0, 6.0), "100.0")
     _eq(percent_change(5.0, 2.0), "-60.0")
@@ -153,6 +178,7 @@ if __name__ == "__main__":
         test_percent_increase()
         test_percent_difference()
         test_portion_of()
+        test_percent_of()
         test_percent_change()
         print("\n\nDone.")
         if len(FAILURES):
