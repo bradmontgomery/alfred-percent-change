@@ -6,13 +6,13 @@ copy & paste this code into Alfred.
 Supported Calculations:
 
 1. Percent Change (increase/decrease): `% 3 6` -> 100%
-2. Portion of; 3 is what percent of 100: `% 3 of 100` -> 3%
+2. Percentage of; 3 is what percent of 100: `% 3 of 100` -> 3%
 3. Percent of: 5 percent of 100 is 5: `% 5 percent of 100` -> 5, or `% 5% of 100` -> 5
 4. Percent Difference; What is 2 percent from 100: `% 100 - 2%`
 5. Percent Increase; What is 100 + 2%: `% 100 + 2%`
 
 """
-__version__ = "1.4.0"
+__version__ = "1.5.0"
 import sys
 from workflow import Workflow, ICON_INFO
 
@@ -27,7 +27,7 @@ def percent_difference(a, b):
     return str(round(a - (a * (b / 100.0)), 2))
 
 
-def portion_of(a, b):
+def percentage_of(a, b):
     """`a` of `b` is what percent?"""
     return "{0}%".format(str(round((a / b) * 100, 2)))
 
@@ -76,11 +76,11 @@ def parse(args):
             result = percent_of(a, b)
             return (result, 'Percentage of')
         elif len(values) == 3 and 'of' in values:
-            # `% a of b`. portion_of
+            # `% a of b`.percentage_of
             a = float(values[0])
             b = float(values[-1])
-            result = portion_of(a, b)
-            return (result, 'Portion of')
+            result = percentage_of(a, b)
+            return (result, 'Percentage of')
         elif len(values) == 3 and '-' in values:
             # `% a - b%`. percent_difference
             a = float(values[0])
@@ -98,7 +98,7 @@ def parse(args):
             return ("Help", (
                 "Increase: % 3 6, "
                 "Add/Subtract: % 100 + 2%, "
-                "Portion of: % 3 of 100"
+                "Percentage of: % 3 of 100"
             ))
         else:
             return ("What?", "I don't know what you mean.")
@@ -108,7 +108,7 @@ def parse(args):
 
 def main(wf):
     results, subtitle = parse(wf.args)
-    wf.add_item(title=results, subtitle=subtitle)
+    wf.add_item(title=results, subtitle=subtitle, arg=results)
     wf.send_feedback()  # Send results back to Alfred as XML
 
 # -----------------------------------------------------------------------------
@@ -146,10 +146,10 @@ def test_percent_difference():
     _eq(percent_difference(14.0, 2.0), "13.72")
 
 
-def test_portion_of():
-    _eq(portion_of(3.0, 100.00), "3.0%")
-    _eq(portion_of(2.0, 5.0), "40.0%")
-    _eq(portion_of(5.0, 3.0), "166.67%")
+def test_percentage_of():
+    _eq(percentage_of(3.0, 100.00), "3.0%")
+    _eq(percentage_of(2.0, 5.0), "40.0%")
+    _eq(percentage_of(5.0, 3.0), "166.67%")
 
 
 def test_percent_of():
@@ -167,7 +167,7 @@ def test_percent_change():
 
 def test_parse():
     _eq(parse("3 6"), "100.0")  # percent_change
-    _eq(parse("2 of 5"), "40.0")  # portion_of
+    _eq(parse("2 of 5"), "40.0")  # percentage_of
     _eq(parse("100 - 2%"), "98.0")  # percent_decrease
     _eq(parse("100 + 2%"), "102.0")  # percent_increase
 
@@ -177,7 +177,7 @@ if __name__ == "__main__":
         print("Running Tests:\n")
         test_percent_increase()
         test_percent_difference()
-        test_portion_of()
+        test_percentage_of()
         test_percent_of()
         test_percent_change()
         print("\n\nDone.")
