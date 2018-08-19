@@ -1,5 +1,6 @@
 
 
+
 # encoding: utf-8
 """
 This is the python code for the calculations. To build the workflow, I just
@@ -159,7 +160,6 @@ def main(wf):
     elif isinstance(results, types.ListType):
         results = parse(wf.args)
         for i in results:
-            log.debug(i)
             title, subtitle = i
             wf.add_item(title=title, subtitle=subtitle, arg=title)
 
@@ -220,15 +220,15 @@ def test_percent_change():
 
 
 def test_before_percent_decrease():
-    _eq(before_percent_decrease(3.0, 2, "3.06")
-    _eq(before_percent_decrease(5.0, 1.5, "5.08")
-    _eq(before_percent_decrease(2000, 4.6 "2096.44")
+    _eq(before_percent_decrease(3.0, 2), "3.06")
+    _eq(before_percent_decrease(5.0, 1.5), "5.08")
+    _eq(before_percent_decrease(2000, 4.6), "2096.44")
 
 
 def test_before_percent_increase():
-    _eq(before_percent_increase(3.0, 2, "2.94")
-    _eq(before_percent_increase(5.0, 1.5, "4.92")
-    _eq(before_percent_increase(2000, 4.6 "1908.0")
+    _eq(before_percent_increase(3.0, 2), "2.94")
+    _eq(before_percent_increase(5.0, 1.5), "4.92")
+    _eq(before_percent_increase(2000, 4.6), "1908.0")
 
 def test_parse():
     _eq(parse("3 6"), "100.0")  # percent_change
