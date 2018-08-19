@@ -19,6 +19,15 @@ The supported calculations include:
 6. *Original number before Percent Decrease*: What number is 100 2 percent less than?:`% 100 is 2% lt`
 7. *Original number before Percent Increase*: What number is 100 2 percent more than?:`% 100 is 2% gt`
 
+
+-------
+
+Build: 
+
+- workflow-build.py https://gist.github.com/AdamWagner/38228953422e830c4484e62ff116466a
+- `python workflow-build.py -d . -o .`
+
+
 License
 -------
 
