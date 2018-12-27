@@ -18,7 +18,7 @@ The supported calculations include:
 
 - Building uses the [workflow-build.py script](https://gist.github.com/AdamWagner/38228953422e830c4484e62ff116466a)
   bundled in this repo.
-- To build, run: `python workflow-build.py -d . -o .`
+- To build, run: `python workflow-build.py -f -d . -o .`
 
 
 ## License
