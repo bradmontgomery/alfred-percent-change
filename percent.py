@@ -1,6 +1,3 @@
-
-
-
 # encoding: utf-8
 """
 This is the python code for the calculations. To build the workflow, I just
@@ -15,6 +12,13 @@ Supported Calculations:
 5. Percent Increase; What is 100 + 2%: `% 100 + 2%`
 6. Original number before Percent Decrease; What number is 100 2 percent less than?:`% 100 is 2% lt`
 7. Original number before Percent Increase; What number is 100 2 percent more than?:`% 100 is 2% gt`
+
+Tests: To run the tests, run:
+
+    python percent.py test
+
+See the bottom of this file for more details.
+
 """
 
 __version__ = "1.5.1"
@@ -55,7 +59,7 @@ def percent_change(a, b):
 
 def before_percent_decrease(a, b):
     """What is `a` `b`% less than"""
-    percent = b / 100.0 
+    percent = b / 100.0
     result = a / (1 - percent)
     return str(round(result, 2))
 
@@ -117,11 +121,11 @@ def parse(args):
             a = float(values[0])
             b = float(values[-1].replace("%", ""))
             result = percent_increase(a, b)
-            return (result, 'Percent increase') 
+            return (result, 'Percent increase')
 
         elif (len(values) == 3 or len(values) == 4) and 'lt' in values:
             # `% a is b% lt` . original_number_before_decrease
-            # `is` verb optional 
+            # `is` verb optional
             a = float(values[0])
             b = float(values[-2].replace("%", ""))
             result = before_percent_decrease(a, b)
@@ -129,7 +133,7 @@ def parse(args):
 
         elif (len(values) == 3 or len(values) == 4) and 'gt' in values:
             # `% a is b% lt` . original_number_before_decrease
-            # `is` verb optional 
+            # `is` verb optional
             a = float(values[0])
             b = float(values[-2].replace("%", ""))
             result = before_percent_increase(a, b)
@@ -144,7 +148,7 @@ def parse(args):
                 ("Num before % increase:", "% 100 is 2% gt"),
                 ("Num before % decrease:", "% 100 is 2% lt"),
             ]
-    
+
         else:
             return ("What?", "I don't know what you mean.")
     except ValueError:
@@ -168,9 +172,8 @@ def main(wf):
 # -----------------------------------------------------------------------------
 # Some Tests. To run these, do:
 #
-# $ python script.py test
+# $ python percent.py test
 #
-# (yes, I reinvented a wheel, here)
 # -----------------------------------------------------------------------------
 FAILURES = []
 
@@ -254,7 +257,7 @@ if __name__ == "__main__":
     else:
         wf = Workflow(libraries=['./lib'])
         # uncomment to log via log.debug(var)
-        # log = wf.logger 
+        # log = wf.logger
         sys.exit(wf.run(main))
 
 
