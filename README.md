@@ -24,7 +24,7 @@ The supported calculations include:
 ## License
 
 This Workflow is available under the terms of the MIT License. See the full
-[LICENSE](LICENSE.TXT) for more details.
+[LICENSE](LICENSE.txt) for more details.
 
 
 ## Contributing
