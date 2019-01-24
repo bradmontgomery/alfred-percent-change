@@ -1,7 +1,5 @@
 # Percent Change
 
-![Percent Change README image, Icon made by Becris from www.flaticon.com](readme.png)
-
 ![Percent Change Screenshot](screenshot.png)
 
 This is an Alfred Workflow to help you do percentage calculations. You can see some background info on the original [forum post](http://www.alfredforum.com/topic/4731-percent-change/).
