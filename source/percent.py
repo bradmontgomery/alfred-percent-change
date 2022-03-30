@@ -1,4 +1,8 @@
-# encoding: utf-8
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Partly cloudy ⛅️  🌡️+43°F (feels +39°F, 22%) 🌬️0mph 🌑 Wed Mar 30 16:19:59 2022
+
+
 """
 This is the python code for the calculations. To build the workflow, I just
 copy & paste this code into Alfred.
@@ -21,10 +25,17 @@ See the bottom of this file for more details.
 
 """
 
-__version__ = "1.5.1"
+__version__ = "1.6"
 import sys
 import types
-from workflow import Workflow, ICON_INFO
+import json
+
+
+def log(s, *args):
+    if args:
+        s = s % args
+    print(s, file=sys.stderr)
+
 
 
 def percent_increase(a, b):
@@ -80,8 +91,8 @@ def parse(args):
     """
     try:
         values = ''
-        if len(args) == 1 and type(args) == list:
-            values = args[0].strip().split(' ')
+        if len(args) == 2 and type(args) == list:
+            values = args[1].strip().split(' ')
 
         if len(values) == 2:
             # `% a b`. percent_change.
@@ -155,109 +166,49 @@ def parse(args):
         return ("What?", "...")
 
 
-def main(wf):
-    results = parse(wf.args)
-    if isinstance(results, types.TupleType):
+def main():
+    result = {"items": []}
+    results = parse(sys.argv)
+    
+    if isinstance(results, tuple):
         title, subtitle = results
-        wf.add_item(title=title, subtitle=subtitle, arg=title)
+        result["items"].append({
+            "title": title,
+            'subtitle': subtitle,
+            'valid': True,
+            
+            "icon": {
+                "path": ''
+            },
+            'arg': title
+                }) 
+        
 
-    elif isinstance(results, types.ListType):
-        results = parse(wf.args)
+
+    elif isinstance(results, list):
+        results = parse(sys.argv)
+        
+               
         for i in results:
             title, subtitle = i
-            wf.add_item(title=title, subtitle=subtitle, arg=title)
+            result["items"].append({
+            "title": title,
+            'subtitle': subtitle,
+            'valid': True,
+            
+            "icon": {
+                "path": ''
+            },
+            'arg': title 
+                }) 
+        
 
-    wf.send_feedback()  # Send results back to Alfred as XML
+    print (json.dumps(result))
+    
 
-# -----------------------------------------------------------------------------
-# Some Tests. To run these, do:
-#
-# $ python percent.py test
-#
-# -----------------------------------------------------------------------------
-FAILURES = []
-
-
-def _eq(a, b):
-    global FAILURES
-    try:
-        assert a == b
-    except AssertionError:
-        sys.stderr.write("F")
-        FAILURES.append("{0} is not equal to {1}".format(a, b))
-    else:
-        sys.stdout.write(".")
-
-
-def test_percent_increase():
-    _eq(percent_increase(100.0, 2.0), "102.0")
-    _eq(percent_increase(12.34, 2.0), "12.59")
-    _eq(percent_increase(12.34, 2.5), "12.65")
-    _eq(percent_increase(14.0, 2.0), "14.28")
-
-
-def test_percent_decrease():
-    _eq(percent_decrease(100.0, 2.0), "98.0")
-    _eq(percent_decrease(12.34, 2.0), "12.09")
-    _eq(percent_decrease(12.34, 2.5), "12.03")
-    _eq(percent_decrease(14.0, 2.0), "13.72")
-
-
-def test_percentage_of():
-    _eq(percentage_of(3.0, 100.00), "3.0%")
-    _eq(percentage_of(2.0, 5.0), "40.0%")
-    _eq(percentage_of(5.0, 3.0), "166.67%")
-
-
-def test_percent_of():
-    _eq(percent_of(3, 10), "0.3")
-    _eq(percent_of(100, 10), "10.0")
-    _eq(percent_of(5, 100), "5.0")
-    _eq(percent_of(110, 3), "3.3")
-
-
-def test_percent_change():
-    _eq(percent_change(3.0, 6.0), "100.0")
-    _eq(percent_change(5.0, 2.0), "-60.0")
-    _eq(percent_change(3.5, 3.52), "0.57")
-
-
-def test_before_percent_decrease():
-    _eq(before_percent_decrease(3.0, 2), "3.06")
-    _eq(before_percent_decrease(5.0, 1.5), "5.08")
-    _eq(before_percent_decrease(2000, 4.6), "2096.44")
-
-
-def test_before_percent_increase():
-    _eq(before_percent_increase(3.0, 2), "2.94")
-    _eq(before_percent_increase(5.0, 1.5), "4.92")
-    _eq(before_percent_increase(2000, 4.6), "1908.0")
-
-def test_parse():
-    _eq(parse("3 6"), "100.0")  # percent_change
-    _eq(parse("2 of 5"), "40.0")  # percentage_of
-    _eq(parse("100 - 2%"), "98.0")  # percent_decrease
-    _eq(parse("100 + 2%"), "102.0")  # percent_increase
-    _eq(parse("100 is 2% lt"), "102.04")  # before_percent_decrease
-    _eq(parse("100 is 2% gt"), "98.0")  # before_percent_decrease
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 2 and sys.argv[1] == "test":
-        print("Running Tests:\n")
-        test_percent_increase()
-        test_percent_decrease()
-        test_percentage_of()
-        test_percent_of()
-        test_percent_change()
-        print("\n\nDone.")
-        if len(FAILURES):
-            print("ERRORS:")
-            print("\n{0}\n".format("\n".join(FAILURES)))
-    else:
-        wf = Workflow(libraries=['./lib'])
-        # uncomment to log via log.debug(var)
-        # log = wf.logger
-        sys.exit(wf.run(main))
+    main()
 
 
