@@ -4,6 +4,17 @@ Percent Change
 This is an Alfred Workflow to help you do percentage calculations. You can see
 some background info on the original [forum post](http://www.alfredforum.com/topic/4731-percent-change/).
 
+March 2022 updated to Python 3
+--------------
+<a href="https://github.com/giovannicoppola/alfred-percent-change/releases/latest/">
+  
+  <img alt="Downloads"
+       src="https://img.shields.io/github/downloads/giovannicoppola/alfred-percent-change/total?color=purple&label=Downloads"><br/>
+</a>
+
+----------------
+
+
 The supported calculations include:
 
 1. *Percent Change* (increase/decrease): `% 3 6` -> 100%

@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.bradmontgomery.percent_change</string>
+	<string>giovanni.percent_change</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
 	<dict/>
 	<key>createdby</key>
-	<string>Brad Montgomery</string>
+	<string>giovanni from Brad Montgomery</string>
 	<key>description</key>
 	<string>Easily do percentage calculations.</string>
 	<key>disabled</key>
@@ -25,6 +25,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -44,9 +46,9 @@
 				<key>runningsubtext</key>
 				<string>calculating</string>
 				<key>script</key>
-				<string>python percent.py "{query}"</string>
+				<string>python3 percent.py "$1"</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
@@ -54,7 +56,7 @@
 				<key>title</key>
 				<string>Percent Calculations</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -63,7 +65,7 @@
 			<key>uid</key>
 			<string>ABB6BA81-8665-40FE-A867-448DF94386CA</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -73,34 +75,36 @@
 This is an Alfred Workflow to help you do percentage calculations. You can see
 some background info on the original [forum post](http://www.alfredforum.com/topic/4731-percent-change/).
 
-Based on https://github.com/bradmontgomery/alfred-percent-change
-
-Calculations #6 and #7 added by me.
-
+Get the source from: https://github.com/bradmontgomery/alfred-percent-change
 
 The supported calculations include:
 
-1. *Percent Change* (increase/decrease): `% 3 6` -> 100%
-2. *Percentage Of*: 3 is what percent of 100: `% 3 of 100` -> 3%
-3. *Percent Of*: 5 percent of 100 is 5: `% 5 percent of 100` -> 5, or `% 5% of 100` -> 5
+1. *Percent Change* (increase/decrease): `% 3 6` -&gt; 100%
+2. *Percentage Of*: 3 is what percent of 100: `% 3 of 100` -&gt; 3%
+3. *Percent Of*: 5 percent of 100 is 5: `% 5 percent of 100` -&gt; 5, or `% 5% of 100` -&gt; 5
 4. *Percent Decrease*: What is 2 percent from 100: `% 100 - 2%`
 5. *Percent Increase*: What is 100 + 2%: `% 100 + 2%`
 6. *Original number before Percent Decrease*: What number is 100 2 percent less than?:`% 100 is 2% lt`
 7. *Original number before Percent Increase*: What number is 100 2 percent more than?:`% 100 is 2% gt`
 
+## Build:
 
--------
-
-Build: 
-
-- workflow-build.py https://gist.github.com/AdamWagner/38228953422e830c4484e62ff116466a
-- `python workflow-build.py -d . -o .`
+- Building uses the [workflow-build.py script](https://gist.github.com/AdamWagner/38228953422e830c4484e62ff116466a)
+  bundled in this repo.
+- To build, run: `python workflow-build.py -f -d . -o .`
 
 
-License
--------
+## License
 
-This Workflow is available under the terms of the MIT License.</string>
+This Workflow is available under the terms of the MIT License. See the full
+[LICENSE](LICENSE.TXT) for more details.
+
+
+## Contributing
+
+Contributions to this project are welcome. To contribute, feel free to fork
+this repo, add your changes/features/improvements, then open a pull request.
+Don't for get to add your name to the [AUTHORS file](AUTHORS.md).</string>
 	<key>uidata</key>
 	<dict>
 		<key>ABB6BA81-8665-40FE-A867-448DF94386CA</key>
@@ -111,7 +115,11 @@ This Workflow is available under the terms of the MIT License.</string>
 			<real>80</real>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.6</string>
 	<key>webaddress</key>
-	<string>http://bradmontgomery.net</string>
+	<string></string>
 </dict>
 </plist>
