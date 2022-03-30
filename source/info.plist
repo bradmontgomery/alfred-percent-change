@@ -115,6 +115,8 @@ Don't for get to add your name to the [AUTHORS file](AUTHORS.md).</string>
 			<real>80</real>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>1.6</string>
 	<key>webaddress</key>
