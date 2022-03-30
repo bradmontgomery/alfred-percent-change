@@ -176,10 +176,6 @@ def main():
             "title": title,
             'subtitle': subtitle,
             'valid': True,
-            
-            "icon": {
-                "path": ''
-            },
             'arg': title
                 }) 
         
@@ -195,10 +191,6 @@ def main():
             "title": title,
             'subtitle': subtitle,
             'valid': True,
-            
-            "icon": {
-                "path": ''
-            },
             'arg': title 
                 }) 
         
