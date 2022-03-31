@@ -27,7 +27,6 @@ See the bottom of this file for more details.
 
 __version__ = "1.6"
 import sys
-import types
 import json
 
 
@@ -35,7 +34,6 @@ def log(s, *args):
     if args:
         s = s % args
     print(s, file=sys.stderr)
-
 
 
 def percent_increase(a, b):
@@ -169,38 +167,34 @@ def parse(args):
 def main():
     result = {"items": []}
     results = parse(sys.argv)
-    
+
     if isinstance(results, tuple):
         title, subtitle = results
-        result["items"].append({
-            "title": title,
-            'subtitle': subtitle,
-            'valid': True,
-            'arg': title
-                }) 
-        
-
+        result["items"].append(
+            {
+                "title": title,
+                'subtitle': subtitle,
+                'valid': True,
+                'arg': title
+            }
+        )
 
     elif isinstance(results, list):
         results = parse(sys.argv)
-        
-               
+
         for i in results:
             title, subtitle = i
-            result["items"].append({
-            "title": title,
-            'subtitle': subtitle,
-            'valid': True,
-            'arg': title 
-                }) 
-        
+            result["items"].append(
+                {
+                    "title": title,
+                    'subtitle': subtitle,
+                    'valid': True,
+                    'arg': title
+                }
+            )
 
-    print (json.dumps(result))
-    
-
+    print(json.dumps(result))
 
 
 if __name__ == "__main__":
     main()
-
-
