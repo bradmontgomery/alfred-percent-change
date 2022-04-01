@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>giovanni.percent_change</string>
+	<string>net.bradmontgomery.percent_change</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
 	<dict/>
 	<key>createdby</key>
-	<string>giovanni from Brad Montgomery</string>
+	<string>Brad Montgomery</string>
 	<key>description</key>
 	<string>Easily do percentage calculations.</string>
 	<key>disabled</key>
@@ -118,7 +118,7 @@ Don't for get to add your name to the [AUTHORS file](AUTHORS.md).</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.6</string>
+	<string>1.6.1</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
