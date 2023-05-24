@@ -4,13 +4,14 @@ Percent Change
 This is an Alfred Workflow to help you do percentage calculations. You can see
 some background info on the original [forum post](http://www.alfredforum.com/topic/4731-percent-change/).
 
-March 2022 updated to Python 3
---------------
 <a href="https://github.com/giovannicoppola/alfred-percent-change/releases/latest/">
   
   <img alt="Downloads"
        src="https://img.shields.io/github/downloads/giovannicoppola/alfred-percent-change/total?color=purple&label=Downloads"><br/>
 </a>
+
+![demo](images/PercentChange.png)
+
 
 ----------------
 
@@ -25,7 +26,11 @@ The supported calculations include:
 6. *Original number before Percent Decrease*: What number is 100 2 percent less than?:`% 100 is 2% lt`
 7. *Original number before Percent Increase*: What number is 100 2 percent more than?:`% 100 is 2% gt`
 
-## Build:
+## Versions
+- 1.7: Alfred 5 version (November 2022)
+- 1.6: ported to Python 3 (March 2022)
+
+## Build
 
 - Building uses the [workflow-build.py script](https://gist.github.com/AdamWagner/38228953422e830c4484e62ff116466a)
   bundled in this repo.
